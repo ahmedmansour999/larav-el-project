@@ -55,24 +55,24 @@
                                         @foreach ($menus as $menu)
                                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                 <td
-                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-dark">
                                                     {{ $menu->name }}
                                                 </td>
                                                 <td
-                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-dark">
                                                     <img src="{{ asset('images/'.$menu->image) }}" class="w-16 h-16 rounded">
                                                 </td>
                                                 <td
-                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-dark">
                                                     {{ $menu->price }}
                                                 </td>
                                                 <td
-                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-dark">
                                                     <div class="flex space-x-2">
                                                         <a href="{{ route('admin.menus.edit', $menu->id) }}"
-                                                            class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg  text-white">Edit</a>
+                                                            class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg  text-dark">Edit</a>
                                                         <form
-                                                            class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white"
+                                                            class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-dark"
                                                             method="POST"
                                                             action="{{ route('admin.menus.destroy', $menu->id) }}"
                                                             onsubmit="return confirm('Are you sure?');">
@@ -80,12 +80,15 @@
                                                             @method('DELETE')
                                                             <button type="submit">Delete</button>
                                                         </form>
-                                                        <form class="px-4 py-2 bg-primary rounded-lg text-white" method="post" action="{{ route('admin.menus.active', $menu->id) }}">
-                                                            @csrf
-                                                            @method('post')
-                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                            <button type="submit">Accept</button>
-                                                        </form>
+                                                        @if ($menu->state == 0)
+
+                                                            <form class="px-4 py-2 bg-primary rounded-lg text-white" method="post" action="{{ route('admin.menus.active', $menu->id) }}">
+                                                                @csrf
+                                                                @method('post')
+                                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                <button type="submit">Accept</button>
+                                                            </form>
+                                                        @endif
 
                                                     </div>
                                                 </td>

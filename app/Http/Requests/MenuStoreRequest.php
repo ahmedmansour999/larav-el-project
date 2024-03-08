@@ -22,11 +22,11 @@ class MenuStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required'],
+            'name'=>['required' , 'unique:menus' , 'min:3'],
             'image'=>['required' ,'image'],
-            'description'=>['required'],
+            'description'=>['required' , 'min:5'],
             'price'=>['required'],
-            
+
         ];
     }
 }

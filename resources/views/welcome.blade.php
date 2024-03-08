@@ -1,4 +1,5 @@
 <x-guest-layout>
+    
     <!-- Main Hero Content -->
     <div class="container max-w-lg px-4 py-32 mx-auto text-left bg-center bg-no-repeat bg-cover md:max-w-none md:text-center"
         style="background-image: url('https://cdn.pixabay.com/photo/2016/11/18/14/39/beans-1834984_960_720.jpg')">
@@ -132,13 +133,13 @@
                           <h1 class="card-title  ">{{ $menu->name }}</h1>
                           <p class="card-text "> {{ $menu->description }}</p>
                           <p class="card-text "><small class="text-muted">${{ $menu->price }}</small></p>
-                      
+
                         </div>
                       </div>
                     </div>
                   </div>
-                  
-                  
+
+
             @endforeach
             </div>
         </div>

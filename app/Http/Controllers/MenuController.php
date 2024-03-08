@@ -27,7 +27,7 @@ class MenuController extends Controller
     {
         $users = User::all() ;
         $menus = Menu::all() ;
-        return view('admin.menus.index' , ['menus' => $menus , "users" => $users] ) ;
+        return view('admin.menus.index' , ['menus' => $menus , "users" => $users ] ) ;
     }
 
     /**
@@ -45,6 +45,7 @@ class MenuController extends Controller
      */
     public function store(MenuStoreRequest $request)
     {
+
         // Move image file to public/images directory
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
@@ -61,7 +62,7 @@ class MenuController extends Controller
 
         try {
 
-   
+
 
             // Check if request has categories and attach them to the menu item
 

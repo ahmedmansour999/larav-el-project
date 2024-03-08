@@ -13,7 +13,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $menus = Menu::paginate(2);
+        $menus = Menu::paginate(5);
 
         return view('menus.index', compact('menus'));
     }
@@ -59,8 +59,7 @@ class MenuController extends Controller
     function show(){
 
         $user = Auth::user() ;
-        $menus = $user->menus->where('state' , '1') ;
-
+        $menus = $user->menus->all() ;
         return view('items.index' , ['menus' => $menus , 'user' => $user] ) ;
 
     }
@@ -74,11 +73,12 @@ class MenuController extends Controller
 
         // Check if the menu item exists
         if ($menu) {
-            // Detach the menu item from the user
-            $user->menus()->detach($id);
+        // Detach the menu item from all associated categories
 
-            // Delete the menu item from the database
-            $menu->delete()->fresh();
+        // Detach the menu item from all associated users
+        $menu->users()->detach($id);
+
+        // Delete the menu item from the database
 
 
             return to_route('menus.index')->with('danger', 'Menu Item Deleted successfully');

@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\ReservationController as FrontendReservationCo
 use App\Http\Controllers\Frontend\WelcomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StripeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -28,7 +29,7 @@ Route::get('/categories', [FrontendCategoryController::class, 'index'])->name('c
 Route::get('/categories/{category}', [FrontendCategoryController::class, 'show'])->name('categories.show');
 Route::get('/menus', [FrontendMenuController::class, 'index'])->name('menus.index');
 
-Route::get('/cart', [FrontendMenuController::class, 'show'])->name('menus.show');
+Route::get('/cart', [FrontendMenuController::class, 'show'])->name('menus.show')->middleware('auth');
 Route::get('/delete/{id}', [FrontendMenuController::class, 'destroy'])->name('menus.destroy');
 Route::get('/increase/{id}/{count}', [FrontendMenuController::class, 'increase'])->name('menus.increase');
 Route::get('/decrease/{id}/{count}', [FrontendMenuController::class, 'decrease'])->name('menus.decrease');

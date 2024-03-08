@@ -32,6 +32,13 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request)
     {
+
+        $request->validate([
+            'name' => 'required|unique:categories,name|min:3',
+            'description' => 'required|min:5',
+        ]);
+
+
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
         $category = new Category();
