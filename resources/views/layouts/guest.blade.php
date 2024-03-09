@@ -69,6 +69,29 @@
                         </svg>
                     </a>
                 </div>
+                @if (Auth::check())
+
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                    href="{{ route('profile.edit') }}">{{Auth::user()->name}}</a>
+                
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+    
+                        <x-responsive-nav-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                    </form>
+                    
+                  
+                
+                @else
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                href="/login">login</a>
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                href="/register">Register</a>
+                @endif
                 
             </div>
         </nav>
