@@ -1,5 +1,4 @@
 <x-guest-layout>
-    
     <!-- Main Hero Content -->
     <div class="container max-w-lg px-4 py-32 mx-auto text-left bg-center bg-no-repeat bg-cover md:max-w-none md:text-center"
         style="background-image: url({{ asset('images/1.png') }})">
@@ -141,24 +140,27 @@
         <div class="container w-full px-5 py-6 mx-auto">
             <div class="grid lg:grid-cols-4 gap-y-6">
                 @foreach ($menus as $menu)
-                <div class="card mb-3 bg-light" style="max-width: 540px;">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="{{ asset('images/'.$menu->image) }}" alt="menu Logo" class="img-fluid rounded-start align-items-center" style="width: 200px; height: 200px; object-fit: cover;">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h1 class="card-title  ">{{ $menu->name }}</h1>
-                          <p class="card-text "> {{ $menu->description }}</p>
-                          <p class="card-text "><small class="text-muted">${{ $menu->price }}</small></p>
-                      
+                    <div class="card mb-3 bg-light" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <a href="/menus"> <!-- Replace $menu->link with the actual link variable -->
+                                    <img src="{{ asset('images/' . $menu->image) }}" alt="menu Logo"
+                                        class="img-fluid rounded-start align-items-center"
+                                        style="width: 300px; height: 100px; object-fit: cover;">
+                                </a>
+                            </div>
+                            
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h1 class="card-title  ">{{ $menu->name }}</h1>
+                                    <p class="card-text "> {{ $menu->description }}</p>
+                                    <p class="card-text "><small class="text-muted">${{ $menu->price }}</small></p>
+
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  
-                  
-            @endforeach
+                @endforeach
             </div>
         </div>
     </section>
