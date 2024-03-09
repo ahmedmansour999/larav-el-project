@@ -22,7 +22,7 @@ class MenuController extends Controller
     {
 
         if (!Auth::check()) {
-            return redirect()->back()->with('error', 'You must be logged in to place an order.');
+            return redirect()->back()->with('warning', 'You must be logged in to place an order.');
         }
 
         $user = Auth::user();
@@ -40,14 +40,16 @@ class MenuController extends Controller
             } else {
                 alert("no thing") ;
 
-                return redirect()->back()->with('error', 'Failed to add menu item to your order.');
+                return redirect()->back()->with('warning', 'Failed to add menu item to your order.');
             }
+            return redirect()->back()->with('success', 'Menu item added to your order successfully!');
         } catch (\Exception $e) {
             alert("no thing") ;
 
             \Log::error('Error storing menu item: ' . $e->getMessage());
 
-            return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.');
+            // Return error message to user
+            return redirect()->back()->with('warning', 'An unexpected error occurred. Please try again later.');
         }
     }
 
@@ -78,7 +80,7 @@ class MenuController extends Controller
 
             return to_route('menus.index')->with('danger', 'Menu Item Deleted successfully');
         } else {
-            return to_route('menus.index')->with('error', 'Menu Item not found');
+            return to_route('menus.index')->with('warning', 'Menu Item not found');
         }
     }
 

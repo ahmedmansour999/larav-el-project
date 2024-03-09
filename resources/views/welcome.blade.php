@@ -2,23 +2,41 @@
     
     <!-- Main Hero Content -->
     <div class="container max-w-lg px-4 py-32 mx-auto text-left bg-center bg-no-repeat bg-cover md:max-w-none md:text-center"
-        style="background-image: url('https://cdn.pixabay.com/photo/2016/11/18/14/39/beans-1834984_960_720.jpg')">
-        <h1
-            class="font-mono text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 md:text-center sm:leading-none lg:text-5xl">
-            <span class="inline md:block">Welcome To Larainfo Restaurant</span>
-        </h1>
-        <div class="mx-auto mt-2 text-green-50 md:text-center lg:text-lg">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta voluptatem ab necessitatibus illo
-            praesentium
-            culpa excepturi quae commodi quaerat,
-        </div>
-        <div class="flex flex-col items-center mt-12 text-center">
-            <span class="relative inline-flex w-full md:w-auto">
-                <a href="{{ route('reservations.step.one') }}" type="button"
-                    class="inline-flex items-center justify-center px-6 py-2 text-base font-bold leading-6 text-white bg-green-600 rounded-full lg:w-full md:w-auto hover:bg-green-500 focus:outline-none">
-                    Make your Reservation
-                </a>
-        </div>
+        style="background-image: url({{ asset('images/1.png') }})">
+
+    
+
+        @if (Auth::check())
+            <h1
+                class="font-mono text-3xl font-extrabold text-transparent bg-clip-text  md:text-center sm:leading-none lg:text-5xl">
+                <span class="inlin   e md:block" style="color: rgb(20, 12, 58); ">Welcome {{ $user_name }} To AAAM Restaurant
+                    website</span>
+            </h1>
+            <div class="flex flex-col items-center mt-12 text-center">
+                <span class="relative inline-flex w-full md:w-auto">
+                    <a href="{{ route('reservations.step.one') }}" type="button"
+                        class="inline-flex items-center justify-center px-6 py-2 text-base font-bold leading-6 text-white bg-green-600 rounded-full lg:w-full md:w-auto hover:bg-green-500 focus:outline-none">
+                        Make your Reservation
+                    </a>
+            </div>
+        @else
+            <h1
+                class="font-mono text-3xl font-extrabold text-transparent bg-clip-text  md:text-center sm:leading-none lg:text-5xl">
+                <span class="inlin   e md:block" style="color: rgb(20, 12, 58);">Please Sign In To Order from our Delicius
+                    Menu!</span>
+            </h1>
+            <div class="flex flex-col items-center mt-12 text-center">
+                <span class="relative inline-flex w-full md:w-auto">
+                    <a href="/login" type="button"
+                        class="inline-flex items-center justify-center px-6 py-2 text-base font-bold leading-6 text-white bg-green-600 rounded-full lg:w-full md:w-auto hover:bg-green-500 focus:outline-none">
+                        Login Now!
+                    </a>
+            </div>
+        @endif
+
+        
+       
+
     </div>
     <!-- End Main Hero Content -->
     <section class="px-2 py-32 bg-white md:px-0">
@@ -79,8 +97,8 @@
                             inventore a veritatis doloremque corrupti. Veritatis est expedita cupiditate!</p>
                         <ul>
                             <li class="flex items-center py-2 space-x-4 xl:py-3">
-                                <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
                                     </path>
@@ -96,8 +114,8 @@
                                 <span class="font-medium text-gray-500">Easy Payments</span>
                             </li>
                             <li class="flex items-center py-2 space-x-4 xl:py-3">
-                                <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
                                     </path>
@@ -133,13 +151,13 @@
                           <h1 class="card-title  ">{{ $menu->name }}</h1>
                           <p class="card-text "> {{ $menu->description }}</p>
                           <p class="card-text "><small class="text-muted">${{ $menu->price }}</small></p>
-
+                      
                         </div>
                       </div>
                     </div>
                   </div>
-
-
+                  
+                  
             @endforeach
             </div>
         </div>
