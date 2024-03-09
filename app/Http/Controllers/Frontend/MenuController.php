@@ -21,15 +21,12 @@ class MenuController extends Controller
     public function store(Request $request , $id)
     {
 
-        // Check if user is authenticated
         if (!Auth::check()) {
             return redirect()->back()->with('error', 'You must be logged in to place an order.');
         }
 
-        // Get authenticated user
         $user = Auth::user();
 
-        // Get menu ID from the request
         $menuId = $id;
 
         try {
@@ -48,10 +45,8 @@ class MenuController extends Controller
         } catch (\Exception $e) {
             alert("no thing") ;
 
-            // Log the error for debugging
             \Log::error('Error storing menu item: ' . $e->getMessage());
 
-            // Return error message to user
             return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.');
         }
     }

@@ -1,5 +1,8 @@
 <x-guest-layout>
+
+
     @if (count($menus) > 0)
+
         <h1 class="text-center fs-1 mt-5 fw-bold ">{{ $user['name'] }} Cart </h1>
         <div class="container w-full px-5 py-6 mx-auto">
             <div class="payment">
@@ -59,7 +62,7 @@
                             </div>
                         @else
                             <div class="accepted bg-primary text-center p-3 fw-bold text-white">
-                                the Order Is Accepted
+                                <i class="fas fa-clock" ></i>  being processed
                             </div>
                         @endif
 

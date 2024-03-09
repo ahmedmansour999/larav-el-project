@@ -1,9 +1,31 @@
 <x-guest-layout>
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+    @if(session('message'))
+    <script>
+        $(function() {
+            $('#messageModal').modal('show');
+        });
+    </script>
+@endif
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="messageModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message">{{ session('message') }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-    @endif
+</div>
+
     <div class="container w-full px-5 py-6 mx-auto">
         <div class="grid lg:grid-cols-4 gap-y-6">
             @foreach ($menus as $menu)

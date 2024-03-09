@@ -60,6 +60,7 @@
                     {{ __('reservation') }}
 
                 </x-admin-nav-link>
+                
 
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open"

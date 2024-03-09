@@ -34,7 +34,6 @@ Route::get('/delete/{id}', [FrontendMenuController::class, 'destroy'])->name('me
 Route::get('/increase/{id}/{count}', [FrontendMenuController::class, 'increase'])->name('menus.increase');
 Route::get('/decrease/{id}/{count}', [FrontendMenuController::class, 'decrease'])->name('menus.decrease');
 
-Route::get('/menus/store/{id}', [FrontendMenuController::class, 'store'])->name('menus.store');
 Route::get('/reservation/step-one', [FrontendReservationController::class, 'stepOne'])->name('reservations.step.one');
 Route::post('/reservation/step-one', [FrontendReservationController::class, 'storeStepOne'])->name('reservations.store.step.one');
 Route::get('/reservation/step-two', [FrontendReservationController::class, 'stepTwo'])->name('reservations.step.two');
@@ -49,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/menus/store/{id}', [FrontendMenuController::class, 'store'])->name('menus.store');
 });
 
 
