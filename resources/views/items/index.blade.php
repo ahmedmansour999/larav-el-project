@@ -1,6 +1,24 @@
 <x-guest-layout>
 
+    <div>
+        @if (session()->has('danger'))
+            <div class="alert alert-danger m-5" role="alert">
+                {{ session()->get('danger') }}
+            </div>
+        @endif
+        @if (session()->has('success'))
+            <div class="alert alert-success m-5" role="alert">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+        @if (session()->has('warning'))
+            <div class="alert alert-warning m-5" role="alert">
+                {{ session()->get('warning') }}
+            </div>
+        @endif
+    </div>
 
+    
     @if (count($menus) > 0)
 
         <h1 class="text-center fs-1 mt-5 fw-bold ">{{ $user['name'] }} Cart </h1>

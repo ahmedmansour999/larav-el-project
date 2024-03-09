@@ -7,16 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\MenuStoreRequest;
-
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
-use Illuminate\Support\Facades\DB; // Import the DB facade
-
-
-
-
-
-
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -25,9 +19,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $users = User::all() ;
-        $menus = Menu::all() ;
-        return view('admin.menus.index' , ['menus' => $menus , "users" => $users ] ) ;
+        $users = User::all();
+        $menus = Menu::all();
+        return view('admin.menus.index', compact('menus', 'users'));
     }
 
     /**
@@ -36,8 +30,7 @@ class MenuController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.menus.create', compact('categories') ) ;
-
+        return view('admin.menus.create', compact('categories'));
     }
 
     /**
@@ -45,53 +38,23 @@ class MenuController extends Controller
      */
     public function store(MenuStoreRequest $request)
     {
-
-        // Move image file to public/images directory
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-
-        // Create a new menu item instance
-        $menu = new Menu();
-        $menu->name = $request->name;
-        $menu->description = $request->description;
-        $menu->price = $request->price;
-        $menu->image = $imageName;
-
-        // Begin database transaction
-        DB::beginTransaction();
-
         try {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
 
-
-
-            // Check if request has categories and attach them to the menu item
-
+            $menu = new Menu();
+            $menu->name = $request->name;
+            $menu->description = $request->description;
+            $menu->price = $request->price;
+            $menu->image = $imageName;
             $menu->save();
 
             if ($request->has('categories')) {
                 $menu->categories()->attach($request->categories);
             }
 
-
-            // Commit the transaction
-            DB::commit();
-
-            // Redirect to the index page with success message
             return redirect()->route('admin.menus.index')->with('success', 'Menu Item Added successfully');
         } catch (\Exception $e) {
-            // Rollback the transaction in case of error
-            DB::rollback();
-
-            // Log the error or handle it appropriately
-            // For now, let's just return the error message
-
-            DB::commit();
-
-            return redirect()->route('admin.menus.index')->with('success', 'Menu Item Added successfully');
-        } catch (\Exception $e) {
-            DB::rollback();
-
-
             return back()->with('error', 'Failed to add menu item: ' . $e->getMessage());
         }
     }
@@ -101,10 +64,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-
-
-        return to_route('userItems');
-
+        return redirect()->route('userItems'); // Assuming 'userItems' is a valid route name
     }
 
     /**
@@ -113,9 +73,7 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         $categories = Category::all();
-
         return view('admin.menus.edit', compact('menu', 'categories'));
-
     }
 
     /**
@@ -123,49 +81,65 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+                'price' => 'required|numeric|min:0',
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        $menu->name = $request->name;
-        $menu->description = $request->description;
-        $menu->price = $request->price;
+            $menu->name = $request->name;
+            $menu->description = $request->description;
+            $menu->price = $request->price;
 
-        if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            $menu->image = $imageName;
+            if ($request->hasFile('image')) {
+                $imageName = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('images'), $imageName);
+                $menu->image = $imageName;
+            }
+
+            if ($request->has('categories')) {
+                $menu->categories()->sync($request->categories);
+            }
+
+            $menu->save();
+
+            return redirect()->route('admin.menus.index')->with('success', 'Menu Item Updated successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to update menu item: ' . $e->getMessage());
         }
-        if($request->has('categories')){
-            $menu->categories()->sync($request->categories);
-        }
-
-        $menu->save();
-
-        return redirect()->route('admin.menus.index')->with('warning', 'Menu Item Updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Menu $menu)
+    public function destroy($id)
     {
-        $menu->delete();
+        try {
+            $user = Auth::user();
+            $menu = $user->menus()->findOrFail($id);
+            $menu->categories()->detach();
+            $menu->delete();
 
-        return redirect()->route('admin.menus.index')->with('danger', 'Menu Item Deleted successfully');
+            return redirect()->route('admin.menus.index')->with('success', 'Menu Item Deleted successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete menu item: ' . $e->getMessage());
+        }
     }
+
+    /**
+     * Activate the specified menu item.
+     */
     public function active($id)
     {
-        $menu = Menu::findOrFail($id);
+        try {
+            $menu = Menu::findOrFail($id);
+            $menu->update(['state' => '1']);
 
-        $menu->update(['state' => '1']);
-
-        return redirect()->route('admin.menus.index')->with('success', 'Menu Item Activated successfully');
+            return redirect()->route('admin.menus.index')->with('success', 'Menu Item Activated successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to activate menu item: ' . $e->getMessage());
+        }
     }
-
-
-
 }

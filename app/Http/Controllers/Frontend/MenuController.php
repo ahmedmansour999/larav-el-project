@@ -34,13 +34,13 @@ class MenuController extends Controller
 
 
             if ($result) {
-                alert("no thing") ;
+               
 
                 return redirect()->back()->with('success', 'Menu item added to your order successfully!');
             } else {
-                alert("no thing") ;
+               
 
-                return redirect()->back()->with('warning', 'Failed to add menu item to your order.');
+                return redirect()->back()->with('warning', 'test');
             }
             return redirect()->back()->with('success', 'Menu item added to your order successfully!');
         } catch (\Exception $e) {
@@ -94,7 +94,7 @@ class MenuController extends Controller
         $menu->save();
 
         // Redirect back or to a specific route
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Your order count  has been increased!');
     }
     public function decrease($id, $count)
     {
@@ -106,7 +106,7 @@ class MenuController extends Controller
         $menu->save();
 
         // Redirect back or to a specific route
-        return redirect()->back();
+        return redirect()->back()->with('warning', 'Your order count  has been Decreased!');
     }
 
 
