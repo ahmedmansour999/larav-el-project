@@ -11,7 +11,7 @@ class StripeController extends Controller
     function index(){
 
         return view('payment.checkout') ;
-        
+
     }
 
 public function checkout()
@@ -44,7 +44,7 @@ public function checkout()
             ],
             'mode'        => 'payment',
             'success_url' => route('success'),
-            'cancel_url'  => route('checkout'),
+            'cancel_url'  => route('checkout',$total),
         ]);
 
         return redirect()->away($session->url);
@@ -52,6 +52,7 @@ public function checkout()
 
     public function success()
     {
+
         return "Thanks for you order You have just completed your payment. The seeler will reach out to you as soon as possible";
-}
+    }
 }

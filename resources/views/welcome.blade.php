@@ -1,9 +1,11 @@
 <x-guest-layout>
     <!-- Main Hero Content -->
+
+
     <div class="container max-w-lg px-4 py-32 mx-auto text-left bg-center bg-no-repeat bg-cover md:max-w-none md:text-center"
         style="background-image: url({{ asset('images/1.png') }})">
 
-    
+
 
         @if (Auth::check())
             <h1
@@ -42,11 +44,13 @@
             </div>
         @endif
 
-        
-       
+
+
 
     </div>
     <!-- End Main Hero Content -->
+
+    
     <section class="px-2 py-32 bg-white md:px-0">
         <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
             <div class="flex flex-wrap items-center sm:-mx-3">
@@ -152,13 +156,13 @@
                     <div class="card mb-3 bg-light" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <a href="/menus"> 
+                                <a href="/menus">
                                     <img src="{{ asset('images/' . $menu->image) }}" alt="menu Logo"
                                         class="img-fluid rounded-start align-items-center"
                                         style="width: 300px; height: 100px; object-fit: cover;">
                                 </a>
                             </div>
-                            
+
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h1 class="card-title  ">{{ $menu->name }}</h1>

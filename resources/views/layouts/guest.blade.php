@@ -69,7 +69,7 @@
                 @endif
 
 
-                    href="{{ route('user.reservations') }}">Your Reservations</a>
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400" href="{{ route('user.reservations') }}"> Your Reservations</a>
 
                 <div>
                     <a href="{{ route('menus.show') }}">
@@ -85,7 +85,7 @@
                     <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                     href="{{ route('profile.edit') }}">{{Auth::user()->name}}
                     </a>
-                
+
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

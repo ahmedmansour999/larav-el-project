@@ -1,6 +1,23 @@
 <x-guest-layout>
     <div class="container w-full px-5 py-6 mx-auto">
         <div class="grid lg:grid-cols-4 gap-y-6">
+            <div>
+                @if (session()->has('danger'))
+                    <div class="alert alert-danger m-5" role="alert">
+                        {{ session()->get('danger') }}
+                    </div>
+                @endif
+                @if (session()->has('success'))
+                    <div class="alert alert-success m-5" role="alert">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
+                @if (session()->has('warning'))
+                    <div class="alert alert-warning m-5" role="alert">
+                        {{ session()->get('warning') }}
+                    </div>
+                @endif
+            </div>
             @foreach ($categories as $category)
                 <div class="max-w-xs mx-2 mb-2 rounded-lg shadow-lg">
                     <img width="100%" style="max-height:180px " src="{{ asset('images/'.$category->image) }}" alt="menu Logo" width="100">
