@@ -1,5 +1,6 @@
 <x-guest-layout>
 
+
     <div>
         @if (session()->has('danger'))
             <div class="alert alert-danger m-5" role="alert">
