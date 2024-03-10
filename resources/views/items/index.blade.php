@@ -1,6 +1,5 @@
 <x-guest-layout>
-<<<<<<< HEAD
-=======
+
 
     <div>
         @if (session()->has('danger'))
@@ -20,8 +19,7 @@
         @endif
     </div>
 
-    
->>>>>>> ccf92ab54bc55318ce3376f1a2d7ec4a29e2238f
+
     @if (count($menus) > 0)
         <!-- Order Form -->
         <form action="{{ route('order.store') }}" method="POST">
