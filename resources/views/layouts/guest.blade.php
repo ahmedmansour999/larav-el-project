@@ -60,7 +60,9 @@
                     href="{{ route('reservations.step.one') }}">Reserve</a>
                 <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                     href="{{ route('user.reservations') }}">Your Reservations</a>
-                    href="{{ route('user.reservations') }}">Reservations</a>
+                    <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+
+                     href="{{ route('user.reservations') }}"> Reservations</a>
                     @if (auth()->check())
                     <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                         href="{{ route('order.show' , auth()->user()->id ) }}">Orders</a>
