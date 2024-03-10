@@ -115,21 +115,20 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
-
-        try {
-            $user = Auth::user();
-            $menu = $user->menus()->findOrFail($id);
-            $menu->categories()->detach();
-            $menu->delete();
-
-
-            return redirect()->route('admin.menus.index')->with('success', 'Menu Item Deleted successfully');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Failed to delete menu item: ' . $e->getMessage());
-        }
+        // Detach relationships from user_menu table
+        $menu->users()->detach(); // Assuming users() is the relationship to user_menu table
+        
+        // Detach relationships from category_menu table
+        $menu->categories()->detach(); // Assuming categories() is the relationship to category_menu table
+    
+        // Delete the menu
+        $menu->delete();
+    
+        return redirect()->route('admin.menus.index')->with('danger', 'Menu Deleted Successfully');
     }
+    
 
 
 
