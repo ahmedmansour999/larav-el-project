@@ -99,6 +99,7 @@ class MenuController extends Controller
                 $menu->image = $imageName;
             }
 
+
             if ($request->has('categories')) {
                 $menu->categories()->sync($request->categories);
             }
@@ -116,11 +117,13 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
+
         try {
             $user = Auth::user();
             $menu = $user->menus()->findOrFail($id);
             $menu->categories()->detach();
             $menu->delete();
+
 
             return redirect()->route('admin.menus.index')->with('success', 'Menu Item Deleted successfully');
         } catch (\Exception $e) {
@@ -129,9 +132,11 @@ class MenuController extends Controller
     }
 
 
+
     /**
      * Activate the specified menu item.
      */
+
     public function active($id)
     {
         try {
@@ -143,8 +148,5 @@ class MenuController extends Controller
             return back()->with('error', 'Failed to activate menu item: ' . $e->getMessage());
         }
     }
-
-
-
 
 }
