@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryControll
 use App\Http\Controllers\Frontend\MenuController as FrontendMenuController;
 use App\Http\Controllers\Frontend\ReservationController as FrontendReservationController;
 use App\Http\Controllers\Frontend\WelcomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Auth;
@@ -56,8 +57,10 @@ Route::middleware(['auth' , 'admin'])->name('admin.')->prefix('admin')->group(fu
     Route::get('/' , [AdminController::class , 'index'])->name('index')  ;
     Route::resource('categories' , CategoryController::class) ;
     Route::resource('menus' , MenuController::class) ;
+    Route::get('orders' , [MenuController::class , 'showOrders'])->name('orders-show') ;
     Route::post('active/{id}' , [MenuController::class , 'active'])->name('menus.active') ;
     Route::get('/users', [UserController::class, 'items'])->name('userItems');
+    Route::get('/users/orders', [UserController::class, 'orders'])->name('orders');
     Route::resource('tables' , TableController::class) ;
     Route::resource('reservation' , ReservationController::class) ;
 }) ;
@@ -78,6 +81,24 @@ route::get('payIndex' , [StripeController::class , 'index'])->name('payment') ;
 route::get('checkout' , [StripeController::class , 'checkout'])->name('checkout') ;
 route::post('session' , [StripeController::class , 'session'])->name('session') ;
 Route::get('/success', [StripeController::class , 'success'])->name('success');
+
+
+
+
+
+
+
+// order Route
+
+Route::middleware('auth')->group(function(){
+
+    route::resource('order' , OrderController::class) ;
+    route::post('accept/{id}' , [OrderController::class , 'accept' ])->name('order.accept') ;
+    route::post('cancel/{id}' , [OrderController::class , 'cancel' ])->name('order.cancel') ;
+
+}) ;
+
+
 
 
 

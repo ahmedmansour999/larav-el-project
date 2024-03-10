@@ -50,6 +50,11 @@
                     {{ __('Menus') }}
 
                 </x-admin-nav-link>
+                <x-admin-nav-link :href="route('order.index')" :active="request()->routeIs('order.index')">
+
+                    {{ __('Orders') }}
+
+                </x-admin-nav-link>
                 <x-admin-nav-link :href="route('admin.tables.index')" :active="request()->routeIs('admin.tables.index')">
 
                     {{ __('Tables') }}
@@ -60,7 +65,7 @@
                     {{ __('reservation') }}
 
                 </x-admin-nav-link>
-                
+
 
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open"

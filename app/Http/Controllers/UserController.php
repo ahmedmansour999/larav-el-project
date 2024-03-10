@@ -16,25 +16,18 @@ class UserController extends Controller
      */
     public function showReservations()
     {
-        // Check if the user is authenticated
         if (!Auth::check()) {
-            // Redirect the user to the login page if they are not authenticated
             return redirect()->route('login');
         }
 
-        // Get the currently authenticated user
         $user = Auth::user();
 
-        // Check if the user object is not null
         if (!$user) {
-            // Handle the case where the user object is null
             abort(404, 'User not found');
         }
 
-        // Retrieve the user's reservations and order them by res_date
         $reservations = $user->reservations()->orderBy('res_date', 'desc')->get();
 
-        // Return the view with reservations data
         return view('user.reservations', compact('reservations'));
     }
 
@@ -46,6 +39,25 @@ class UserController extends Controller
         $menus = $member->menus; // Remove the parentheses
         return view('admin.user.items', compact( 'member' , 'users' , 'menus'));
     }
+
+    public function orders(Request $request) {
+        $id = $request->input('userId');
+
+        if (!$id) {
+            return redirect()->back()->with('error', 'User ID is missing.');
+        }
+
+        $member = User::with('orders')->findOrFail($id);
+
+        $users = User::all();
+
+        $orders = $member->orders;
+
+        return view('admin.orders.index', compact('member', 'users', 'orders'));
+    }
+
+
+
 
 
 

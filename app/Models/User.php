@@ -24,7 +24,7 @@ class User extends Authenticatable
         'provider_id',
         'provider_token'
     ];
-    
+
 
     public function menus()
     {
@@ -58,5 +58,10 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'menu_order');
     }
 }

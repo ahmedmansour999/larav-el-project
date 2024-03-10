@@ -60,6 +60,12 @@
                     href="{{ route('reservations.step.one') }}">Make Reservations</a>
                 <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                     href="{{ route('user.reservations') }}">Reservations</a>
+                    @if (auth()->check())
+                    <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                        href="{{ route('order.show' , auth()->user()->id ) }}">Orders</a>
+                @endif
+
+
                 <div>
                     <a href="{{ route('menus.show') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
@@ -73,26 +79,27 @@
 
                 <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                     href="{{ route('profile.edit') }}">{{Auth::user()->name}}</a>
-                
+
+
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-    
+
                         <x-responsive-nav-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>
-                    
-                  
-                
+
+
+
                 @else
                 <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                 href="/login">login</a>
                 <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
                 href="/register">Register</a>
                 @endif
-                
+
             </div>
         </nav>
     </div>
@@ -149,7 +156,7 @@
                         <circle cx="4" cy="4" r="2" stroke="none"></circle>
                     </svg>
                 </a>
-                
+
             </div>
         </div>
     </footer>

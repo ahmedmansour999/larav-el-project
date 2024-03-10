@@ -153,10 +153,15 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
+        // Delete related records in user_menu pivot table
+        $menu->userMenus()->detach();
+
+        // Now delete the menu
         $menu->delete();
 
         return redirect()->route('admin.menus.index')->with('danger', 'Menu Item Deleted successfully');
     }
+
     public function active($id)
     {
         $menu = Menu::findOrFail($id);
@@ -165,6 +170,7 @@ class MenuController extends Controller
 
         return redirect()->route('admin.menus.index')->with('success', 'Menu Item Activated successfully');
     }
+
 
 
 
