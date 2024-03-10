@@ -80,20 +80,40 @@
                                               @endforeach
                                             </td>
 
-                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                                <form action="{{ route('order.accept', $order->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="btn bg-primary text-white btn-primary">Accept</button>
-                                                </form>
-                                            </td>
-                                            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                                                <form action="{{ route('order.cancel', $order->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit" class="btn bg-danger text-white btn-danger">Cancel</button>
-                                                </form>
-                                            </td>
+
+                                            @if ($order->status == 0)
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black">
+
+                                                    <form action="{{ route('order.accept', $order->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <button type="submit" class="btn bg-primary text-white btn-primary">Accept</button>
+                                                    </form>
+                                                </td>
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                                    <form action="{{ route('order.cancel', $order->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <button type="submit" class="btn bg-danger text-white btn-danger">Cancel</button>
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black">
+
+                                                    <form action="{{ route('order.accept', $order->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <button type="submit" disabled class="btn bg-primary text-white btn-primary">Accept</button>
+                                                    </form>
+                                                </td>
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                                                    <form action="{{ route('order.cancel', $order->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <button type="submit" disabled class="btn bg-danger text-white btn-danger">Cancel</button>
+                                                    </form>
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>
