@@ -17,6 +17,15 @@
                         class="inline-flex items-center justify-center px-6 py-2 text-base font-bold leading-6 text-white bg-green-600 rounded-full lg:w-full md:w-auto hover:bg-green-500 focus:outline-none">
                         Make your Reservation
                     </a>
+                    <h1>Enjoy Your Meal in our Restaurant!</h1>
+            </div>
+            <div class="flex flex-col items-center mt-12 text-center">
+                <span class="relative inline-flex w-full md:w-auto">
+                    <a href="/menus" type="button"
+                        class="inline-flex items-center justify-center px-6 py-2 text-base font-bold leading-6 text-white bg-blue-600 rounded-full lg:w-full md:w-auto hover:bg-blue-500 focus:outline-none">
+                        Choose Your Order
+                    </a>
+                    <h1>Choose From Our Delicious Items!</h1>
             </div>
         @else
             <h1
@@ -143,7 +152,7 @@
                     <div class="card mb-3 bg-light" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <a href="/menus"> <!-- Replace $menu->link with the actual link variable -->
+                                <a href="/menus"> 
                                     <img src="{{ asset('images/' . $menu->image) }}" alt="menu Logo"
                                         class="img-fluid rounded-start align-items-center"
                                         style="width: 300px; height: 100px; object-fit: cover;">
