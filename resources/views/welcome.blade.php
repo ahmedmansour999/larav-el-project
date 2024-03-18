@@ -50,7 +50,7 @@
     </div>
     <!-- End Main Hero Content -->
 
-    
+
     <section class="px-2 py-32 bg-white md:px-0">
         <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
             <div class="flex flex-wrap items-center sm:-mx-3">
@@ -152,27 +152,22 @@
         </div>
         <div class="container w-full px-5 py-6 mx-auto">
             <div class="grid lg:grid-cols-4 gap-y-6">
+                @php
+                    $totalPrice = 0;
+                @endphp
                 @foreach ($menus as $menu)
-                    <div class="card mb-3 bg-light" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <a href="/menus">
-                                    <img src="{{ asset('images/' . $menu->image) }}" alt="menu Logo"
-                                        class="img-fluid rounded-start align-items-center"
-                                        style="width: 300px; height: 100px; object-fit: cover;">
-                                </a>
-                            </div>
-
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h1 class="card-title  ">{{ $menu->name }}</h1>
-                                    <p class="card-text "> {{ $menu->description }}</p>
-                                    <p class="card-text "><small class="text-muted">${{ $menu->price }}</small></p>
-
-                                </div>
-                            </div>
-                        </div>
+                <div class="max-w-xs mx-1 mb-2 rounded-lg shadow-lg d-flex justify-content-between flex-column ">
+                    <img class="w-full h-48" src="{{ asset('images/'.$menu->image) }}" alt="Image" />
+                    <div class="px-6 py-4">
+                        <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">
+                            {{ $menu->name }}</h4>
+                        <p class="leading-normal text-gray-700">{{ $menu->description }}.</p>
                     </div>
+                    <div class="flex items-center justify-between p-4">
+                        <span class="text-xl text-green-600">${{ $menu->price }}</span>
+                        <p class="text-xl text-green-600" ><a href="{{ route('menus.store' , $menu->id ) }}" class=" btn btn-primary">Order</a></p>
+                    </div>
+                </div>
                 @endforeach
             </div>
         </div>

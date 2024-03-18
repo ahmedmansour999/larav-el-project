@@ -1,5 +1,6 @@
 <x-guest-layout>
     <div class="container w-full px-5 py-6 mx-auto">
+        <h1 class=" fw-bold fs-1 text-dark text-uppercase " style="color: #eee" >Categories</h1>
         <div class="grid lg:grid-cols-4 gap-y-6">
             <div>
                 @if (session()->has('danger'))
@@ -20,7 +21,7 @@
             </div>
             @foreach ($categories as $category)
                 <div class="max-w-xs mx-2 mb-2 rounded-lg shadow-lg">
-                    <img width="100%" style="max-height:180px " src="{{ asset('images/'.$category->image) }}" alt="menu Logo" width="100">
+                    <img width="100%" style="max-height:150px " src="{{ asset('images/'.$category->image) }}" alt="menu Logo" width="100">
 
                     <div class="px-6 py-4">
 

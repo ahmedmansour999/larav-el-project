@@ -21,7 +21,7 @@
                             <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
                             <div class="mt-1">
                                 <input type="text" id="name" name="name" value="{{ $menu->name }}"
-                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-black leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
                             @error('name')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="mt-1">
                                 <input type="file" id="image" name="image"
-                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-black leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
                             @error('image')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
@@ -45,7 +45,7 @@
                             <div class="mt-1">
                                 <input type="number" min="0.00" max="10000.00" step="0.01" id="price" name="price"
                                     value="{{ $menu->price }}"
-                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-black leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
                             @error('price')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
@@ -55,7 +55,7 @@
                             <label for="body" class="block text-sm font-medium text-gray-700">Description</label>
                             <div class="mt-1">
                                 <textarea id="body" rows="3" name="description"
-                                    class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border py-2 px-3 text-base leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                    class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border py-2 px-3 text-black leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                 {{ $menu->description }}
                                 </textarea>
                             </div>
@@ -64,9 +64,9 @@
                             @enderror
                         </div>
                         <div class="sm:col-span-6 pt-5">
-                            <label for="categories" class="block text-sm font-medium text-gray-700">Categories</label>
+                            <label for="categories" class="block text-sm font-medium text-dark text-gray-700">Categories</label>
                             <div class="mt-1">
-                                <select id="categories" name="categories[]" class="form-multiselect block w-full mt-1"
+                                <select id="categories" name="categories[]" class="form-multiselect block text-dark w-full mt-1"
                                     multiple>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}" @selected($menu->categories->contains($category))>

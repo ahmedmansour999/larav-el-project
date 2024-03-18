@@ -13,7 +13,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $menus = Menu::paginate(5);
+        $menus = Menu::paginate(4);
 
         return view('menus.index', compact('menus'));
     }
@@ -34,11 +34,11 @@ class MenuController extends Controller
 
 
             if ($result) {
-               
+
 
                 return redirect()->back()->with('success', 'Menu item added to your order successfully!');
             } else {
-               
+
 
                 return redirect()->back()->with('warning', 'test');
             }

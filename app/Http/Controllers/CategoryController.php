@@ -51,6 +51,9 @@ class CategoryController extends Controller
 
     }
 
+
+
+
     /**
      * Display the specified resource.
      */
@@ -95,10 +98,20 @@ class CategoryController extends Controller
     return redirect()->route('admin.categories.index')->with('warning','Category Updated Successfully');
     }
 
+
+
     public function destroy(Category $category)
     {
+        // Detach related records from category_menu table
+        $category->menus()->detach();
+
+        // Delete the category
         $category->delete();
 
-        return redirect()->route('admin.categories.index')->with('danger','Category Deleted Successfully');
+        return redirect()->route('admin.categories.index')->with('danger', 'Category Deleted Successfully');
     }
+
+
+
+
 }

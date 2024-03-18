@@ -24,8 +24,8 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('welcome');
-});
-Route::get('/', [WelcomeController::class, 'index']);
+})->name('homepage');
+Route::get('/', [WelcomeController::class, 'index'])->name('wellcomHome');
 Route::get('/categories', [FrontendCategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category}', [FrontendCategoryController::class, 'show'])->name('categories.show');
 Route::get('/menus', [FrontendMenuController::class, 'index'])->name('menus.index');
@@ -99,7 +99,31 @@ Route::middleware('auth')->group(function(){
 }) ;
 
 
+// Route::get('/auth/redirect', function () {
+//     return Socialite::driver('google')->redirect();
+// });
 
+// Route::get('/auth/callback', function () {
+//     $googleUser = Socialite::driver('google')->user();
+//     $user = User::where('email', $googleUser->email)->first();
+//     if (!$user) {
+//         $user = User::updateOrCreate([
+//             'google_id' => $googleUser->id,
+//         ], [
+//             'name' => $googleUser->name,
+//             'email' => $googleUser->email,
+//             'password' => null,
+//             'image' => $googleUser->avatar,
+//             'google_token' => $googleUser->token,
+//             'google_refresh_token' => $googleUser->refreshToken,
+//         ]);
+//     }
+
+//     Auth::login($user);
+
+//     return redirect('/order-products');
+
+// });
 
 
 require __DIR__.'/auth.php';
